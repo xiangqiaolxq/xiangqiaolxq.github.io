@@ -38,7 +38,10 @@
           (4） python 接口部分，如果之前安装过caffe并且python接口没问题那基本没问题，如果没安装过，建议不要安装python接口，坑多。可以在caffe-public 中的Makefile.config中自己修改，按照提示就好 # WITH_PYTHON_LAYER := 1（就这个）
   2.其他部分：
   （1）由于CaffeOnSpark使用maven对所有的java代码进行编译与打包，故一定要给机器安装maven，我的版本是3.3。不然会有mvn：not found的错
-  （2）hadoop 和spark 的部分按照说明提示做就没有问题（我没遇到）</p>
+   (2) jdk找不到jni_md.h 文件，这个事因为jdk中jni.h和jni_md.h不在一个文件目录下，echo "INCLUDE_DIRS += ${JAVA_HOME}/include" >> Makefile.config
+   这个只是将jni.h的目录加入到INCLUDE_DIRS中，自己手动的再添加${JAVA_HOME}/include/linux到后面就可以啦
+  （3）hadoop 和spark 的部分按照说明提示做就没有问题（我没遇到）
+  </p>
 
 <p>以上就是我安装部分中的一些问题与解决方法，我的邮箱<a href="mailto:lxaw1234@163.com">lxaw1234@163.com</a>欢迎大家交流</p>
       </section>

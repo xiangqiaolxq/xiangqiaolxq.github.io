@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Xiangqiaolxq.GitHub.io by xiangqiaolxq</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Xiangqiaolxq.GitHub.io</h1>
+        <p>CaffeOnSpark 安装踩坑记</p>
+
+
+        <p class="view"><a href="https://github.com/xiangqiaolxq">View My GitHub Profile</a></p>
+
+      </header>
+      <section>
+        <p>CaffeOnSpark 是 yahoo的开源项目，是将caffe框架修改后分布式的运行在spark上。
+之前放出的一篇文章 <a href="http://yahoohadoop.tumblr.com/post/129872361846/large-scale-distributed-deep-learning-on-hadoop">http://yahoohadoop.tumblr.com/post/129872361846/large-scale-distributed-deep-learning-on-hadoop</a>
+讲述的如何在hadoop集群上进行分布式的深度学习。由于本人兴趣研究也是分布式的深度学习，特此关注了一下。之前说如果关注人多了考虑开源出来，可能是看到SparkNet这个东西最近比较热也就放出来了吧。最新的介绍在<a href="http://yahoohadoop.tumblr.com/post/139916563586/caffeonspark-open-sourced-for-distributed-deep">http://yahoohadoop.tumblr.com/post/139916563586/caffeonspark-open-sourced-for-distributed-deep</a>      （都在墙外，自己翻吧）
+这两天看了下大概，主要是对caffe进行一些修改，并且类似SparkNet的做法包装一层接口通过JNI的方式可以用java代码调用。并且增加了读取hdfs的功能（还像是MemoryLayer完成）。
+这里主要说下我安装过程中踩得坑以供大家参考</p>
+
+<p>安装中的坑
+  1 caffe部分：
+  需要先满足caffe的安装条件，本人之前玩过caffe也就基本ok。
+  注意点:（1） boost库的版本一定要按照要求&gt;1.55
+         （2） BLAS 根据情况选择自己的，记得一定要在caffe-public的Makefile.config中对应自己的安装
+          (3) protobuf 坑爹的版本一定要选取2.5这个版本的，也许安装caffe是不要求，但是CaffeOnSpark是必须的！！！其他部分的依赖是写死的用的是2.5版本。例如caffe-distri/pom.xml. <a href="https://github.com/yahoo/CaffeOnSpark/blob/master/caffe-distri/pom.xml#L27">https://github.com/yahoo/CaffeOnSpark/blob/master/caffe-distri/pom.xml#L27</a>
+          (4） python 接口部分，如果之前安装过caffe并且python接口没问题那基本没问题，如果没安装过，建议不要安装python接口，坑多。可以在caffe-public 中的Makefile.config中自己修改，按照提示就好 # WITH_PYTHON_LAYER := 1（就这个）
+  2.其他部分：
+  （1）由于CaffeOnSpark使用maven对所有的java代码进行编译与打包，故一定要给机器安装maven，我的版本是3.3。不然会有mvn：not found的错
+  （2）hadoop 和spark 的部分按照说明提示做就没有问题（我没遇到）</p>
+
+<p>以上就是我安装部分中的一些问题与解决方法，我的邮箱<a href="mailto:lxaw1234@163.com">lxaw1234@163.com</a>欢迎大家交流</p>
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
